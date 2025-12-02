@@ -247,8 +247,8 @@
     </div>
 
     <div id="texture-gen">
-        <canvas id="canvas-front" width="1024" height="648"></canvas>
-        <canvas id="canvas-back" width="1024" height="648"></canvas>
+        <canvas id="canvas-front" width="2048" height="1296"></canvas>
+        <canvas id="canvas-back" width="2048" height="1296"></canvas>
         <div id="qr-target"></div>
     </div>
 
@@ -322,19 +322,6 @@
             ctx.font = `${weightPrefix}${size}px ${fontFamily}`;
             return size;
         }
-        function generateBluetoothName() {
-            const prefixes = ["QUEST", "SKILL", "SYNC", "SMART", "LEARN", "TREE"];
-            const middles = ["TR", "XR", "AI", "ML", "DEV"];
-            const suffixes = ["Wave", "Link", "Buddy", "Card", "Root", "Seed"];
-
-            const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-            const middle = middles[Math.floor(Math.random() * middles.length)];
-            const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
-            const randNum = Math.floor(10 + Math.random() * 89); // two digits
-
-            // Example format inspired by QUEST_TR33_Was_BttR but simpler
-            return `${prefix}_${middle}${randNum}_${suffix}`;
-        }
 
         // --- Translations ---
         const dictionary = {
@@ -344,12 +331,14 @@
                 desktop: "Desktop",
                 mobile: "Mobile",
                 deskSteps: [
-                    "Go to SmarterYou.ai and sign in",
-                    "In 'Connect Skill Card' select:\n'QUEST_TR33_Was_BttR'",
-                    "Your verified skills will sync"
+                    "Open the SkillGPT App", 
+                    "Tap your Skill Card or scan QR code",
+                    "Open the SkillGPT website", 
+                    "Scan the QR code that appears on the website from the app", 
+                    "Skills will sync and update"
                 ],
                 mobSteps: [
-                    "Open SmarterYou app",
+                    "Open the SkillGPT app",
                     "Tap your Skill Card or scan QR code",
                     "Skills will sync and update"
                 ],
@@ -376,16 +365,16 @@
                     lastNamePlaceholder: "Smith"
                 },
                 pdf: {
-                    headerTitle: "SmarterYou Skill Card Prototype",
+                    headerTitle: "SkillGPT Skill Card Prototype",
                     headerSubtitle: "Human–Computer Interaction (HCI) Project – University Study",
                     generatedForPrefix: "Prototype card generated for:",
                     intro: "This prototype card is part of a Human–Computer Interaction (HCI) project exploring how to reduce negative patterns of AI use. The system encourages people to first build real skills in a domain and only then unlock AI tools to automate tasks in that domain.",
                     rationale: "By tying access to automation to demonstrated competence, the project aims to:\n• discourage over-reliance on generic AI tools,\n• promote deliberate learning and feedback, and\n• create a transparent link between verified skills, identity, and AI assistance.",
                     layoutHeading: "Prototype card layout",
                     implHeading: "Implementation notes (prototype)",
-                    implText: "In a full deployment, the visual card would be rendered on a dynamic e-ink display attached to an NFC core. The NFC chip stores a URL pointing to the learner's verified skill profile, which the SmarterYou system uses to unlock appropriate AI assistance.",
+                    implText: "In a full deployment, the visual card would be rendered on a dynamic e-ink display attached to an NFC core. The NFC chip stores a URL pointing to the learner's verified skill profile, which the SkillGPT system uses to unlock appropriate AI assistance.",
                     nfcLabel: "NFC encoding (URI record – program your NFC card with this URL):",
-                    footer: "SmarterYou Skill Card – HCI research prototype exploring skill-first, responsible AI use."
+                    footer: "SkillGPT Skill Card – HCI research prototype exploring skill-first, responsible AI use."
                 }
             },
             VI: {
@@ -394,12 +383,12 @@
                 desktop: "Máy tính",
                 mobile: "Di động",
                 deskSteps: [
-                    "Truy cập SmarterYou.ai và đăng nhập",
+                    "Truy cập SkillGPT.ai và đăng nhập",
                     "Trong 'Kết nối Thẻ kỹ năng' chọn:\n'QUEST_TR33_Was_BttR'",
                     "Kỹ năng đã xác minh sẽ đồng bộ"
                 ],
                 mobSteps: [
-                    "Mở ứng dụng SmarterYou",
+                    "Mở ứng dụng SkillGPT",
                     "Chạm Thẻ kỹ năng hoặc quét mã QR",
                     "Kỹ năng sẽ cập nhật ngay"
                 ],
@@ -426,16 +415,16 @@
                     lastNamePlaceholder: "Nguyễn"
                 },
                 pdf: {
-                    headerTitle: "Nguyên mẫu Thẻ Kỹ Năng SmarterYou",
+                    headerTitle: "Nguyên mẫu Thẻ Kỹ Năng SkillGPT",
                     headerSubtitle: "Dự án Tương tác Người–Máy (HCI) – Nghiên cứu tại trường đại học",
                     generatedForPrefix: "Thẻ nguyên mẫu được tạo cho:",
                     intro: "Thẻ nguyên mẫu này là một phần của dự án HCI nhằm khám phá cách giảm các hành vi sử dụng AI tiêu cực. Hệ thống khuyến khích người học xây dựng kỹ năng thực tế trong một lĩnh vực trước, sau đó mới mở khóa các công cụ AI để tự động hóa trong lĩnh vực đó.",
                     rationale: "Bằng cách gắn quyền truy cập tự động hóa với năng lực đã được chứng minh, dự án hướng tới:\n• hạn chế phụ thuộc quá mức vào các công cụ AI chung,\n• thúc đẩy học tập có chủ đích và phản hồi, và\n• tạo mối liên kết minh bạch giữa kỹ năng đã xác minh, danh tính và hỗ trợ AI.",
                     layoutHeading: "Bố cục thẻ nguyên mẫu",
                     implHeading: "Ghi chú triển khai (nguyên mẫu)",
-                    implText: "Trong triển khai đầy đủ, thẻ hiển thị sẽ được hiển thị trên một màn hình e-ink động gắn với lõi NFC. Chip NFC lưu trữ URL trỏ tới hồ sơ kỹ năng đã xác minh của người học, mà hệ thống SmarterYou sử dụng để mở khóa hỗ trợ AI phù hợp.",
+                    implText: "Trong triển khai đầy đủ, thẻ hiển thị sẽ được hiển thị trên một màn hình e-ink động gắn với lõi NFC. Chip NFC lưu trữ URL trỏ tới hồ sơ kỹ năng đã xác minh của người học, mà hệ thống SkillGPT sử dụng để mở khóa hỗ trợ AI phù hợp.",
                     nfcLabel: "Mã hóa NFC (bản ghi URI – ghi URL này vào thẻ NFC của bạn):",
-                    footer: "Thẻ Kỹ Năng SmarterYou – nguyên mẫu nghiên cứu HCI về việc sử dụng AI có trách nhiệm dựa trên kỹ năng trước."
+                    footer: "Thẻ Kỹ Năng SkillGPT – nguyên mẫu nghiên cứu HCI về việc sử dụng AI có trách nhiệm dựa trên kỹ năng trước."
                 }
             },
             ZH: {
@@ -444,12 +433,12 @@
                 desktop: "电脑",
                 mobile: "手机",
                 deskSteps: [
-                    "访问 SmarterYou.ai 并登录",
+                    "访问 SkillGPT.ai 并登录",
                     "在“连接技能卡”中选择：\n'QUEST_TR33_Was_BttR'",
                     "你已验证的技能将会同步"
                 ],
                 mobSteps: [
-                    "打开 SmarterYou 应用",
+                    "打开 SkillGPT 应用",
                     "轻触技能卡或扫描二维码",
                     "技能将会同步并更新"
                 ],
@@ -476,7 +465,7 @@
                     lastNamePlaceholder: "张"
                 },
                 pdf: {
-                    headerTitle: "SmarterYou 技能卡原型",
+                    headerTitle: "SkillGPT 技能卡原型",
                     headerSubtitle: "人机交互（HCI）项目 – 大学研究",
                     generatedForPrefix: "为以下对象生成的原型卡片：",
                     intro: "此原型卡片是一个人机交互项目的一部分，用于研究如何减少对 AI 的负面使用模式。系统鼓励人们先在某一领域建立真实技能，然后再解锁 AI 工具来自动化该领域中的任务。",
@@ -485,7 +474,7 @@
                     implHeading: "实现说明（原型）",
                     implText: "在完整部署中，可视卡片将显示在带有 NFC 核心的动态电子墨水屏上。NFC 芯片存储指向学习者已验证技能档案的 URL，SmarterYou 系统使用该链接来解锁相应的 AI 支持。",
                     nfcLabel: "NFC 编码（URI 记录 – 请使用此 URL 写入 NFC 卡）：",
-                    footer: "SmarterYou 技能卡 – 探索以技能优先、负责任使用 AI 的 HCI 研究原型。"
+                    footer: "SkillGPT 技能卡 – 探索以技能优先、负责任使用 AI 的 HCI 研究原型。"
                 }
             },
             FR: {
@@ -494,12 +483,12 @@
                 desktop: "Ordinateur",
                 mobile: "Mobile",
                 deskSteps: [
-                    "Allez sur SmarterYou.ai et connectez-vous",
+                    "Allez sur SkillGPT.ai et connectez-vous",
                     "Dans « Connecter la carte de compétences », choisissez :\n'QUEST_TR33_Was_BttR'",
                     "Vos compétences vérifiées seront synchronisées"
                 ],
                 mobSteps: [
-                    "Ouvrez l'application SmarterYou",
+                    "Ouvrez l'application SkillGPT",
                     "Approchez votre carte ou scannez le QR code",
                     "Les compétences seront synchronisées et mises à jour"
                 ],
@@ -526,16 +515,16 @@
                     lastNamePlaceholder: "Dupont"
                 },
                 pdf: {
-                    headerTitle: "Prototype de Carte de Compétences SmarterYou",
+                    headerTitle: "Prototype de Carte de Compétences SkillGPT",
                     headerSubtitle: "Projet d'Interaction Homme–Machine (HCI) – Étude universitaire",
                     generatedForPrefix: "Carte prototype générée pour :",
                     intro: "Cette carte prototype fait partie d'un projet HCI qui explore comment réduire les usages négatifs de l'IA. Le système encourage les utilisateurs à développer d'abord de vraies compétences dans un domaine, puis à débloquer les outils d'IA pour automatiser les tâches dans ce domaine.",
                     rationale: "En liant l'accès à l'automatisation à une compétence démontrée, le projet vise à :\n• décourager la dépendance excessive aux outils d'IA génériques,\n• encourager un apprentissage réfléchi et le feedback,\n• créer un lien transparent entre compétences vérifiées, identité et assistance IA.",
                     layoutHeading: "Disposition de la carte prototype",
                     implHeading: "Notes de mise en œuvre (prototype)",
-                    implText: "Dans un déploiement complet, la carte visuelle serait rendue sur un écran e-ink dynamique relié à un cœur NFC. La puce NFC stocke une URL vers le profil de compétences vérifiées de l'apprenant, que le système SmarterYou utilise pour débloquer l'assistance IA appropriée.",
+                    implText: "Dans un déploiement complet, la carte visuelle serait rendue sur un écran e-ink dynamique relié à un cœur NFC. La puce NFC stocke une URL vers le profil de compétences vérifiées de l'apprenant, que le système SkillGPT utilise pour débloquer l'assistance IA appropriée.",
                     nfcLabel: "Encodage NFC (enregistrement URI – programmez votre carte NFC avec cette URL) :",
-                    footer: "Carte de Compétences SmarterYou – prototype de recherche HCI explorant un usage responsable de l'IA fondé sur les compétences."
+                    footer: "Carte de Compétences SkillGPT – prototype de recherche HCI explorant un usage responsable de l'IA fondé sur les compétences."
                 }
             },
             ES: {
@@ -544,12 +533,12 @@
                 desktop: "Ordenador",
                 mobile: "Móvil",
                 deskSteps: [
-                    "Ve a SmarterYou.ai e inicia sesión",
+                    "Ve a SkillGPT.ai e inicia sesión",
                     "En « Conectar Tarjeta de Habilidades », selecciona:\n'QUEST_TR33_Was_BttR'",
                     "Tus habilidades verificadas se sincronizarán"
                 ],
                 mobSteps: [
-                    "Abre la aplicación SmarterYou",
+                    "Abre la aplicación SkillGPT",
                     "Toca tu tarjeta o escanea el código QR",
                     "Las habilidades se sincronizarán y se actualizarán"
                 ],
@@ -576,16 +565,16 @@
                     lastNamePlaceholder: "García"
                 },
                 pdf: {
-                    headerTitle: "Prototipo de Tarjeta de Habilidades SmarterYou",
+                    headerTitle: "Prototipo de Tarjeta de Habilidades SkillGPT",
                     headerSubtitle: "Proyecto de Interacción Persona–Ordenador (HCI) – Estudio universitario",
                     generatedForPrefix: "Tarjeta prototipo generada para:",
                     intro: "Esta tarjeta prototipo forma parte de un proyecto de HCI que explora cómo reducir los patrones negativos de uso de la IA. El sistema anima a las personas a desarrollar primero habilidades reales en un dominio y solo después desbloquear herramientas de IA para automatizar tareas en ese ámbito.",
                     rationale: "Al vincular el acceso a la automatización con la competencia demostrada, el proyecto pretende:\n• desincentivar la dependencia excesiva de herramientas de IA genéricas,\n• promover un aprendizaje deliberado y el feedback, y\n• crear un vínculo transparente entre habilidades verificadas, identidad y asistencia de IA.",
                     layoutHeading: "Diseño de la tarjeta prototipo",
                     implHeading: "Notas de implementación (prototipo)",
-                    implText: "En un despliegue completo, la tarjeta visual se renderizaría en una pantalla de tinta electrónica dinámica conectada a un núcleo NFC. El chip NFC almacena una URL que apunta al perfil de habilidades verificadas de la persona, que el sistema SmarterYou utiliza para desbloquear la asistencia de IA adecuada.",
+                    implText: "En un despliegue completo, la tarjeta visual se renderizaría en una pantalla de tinta electrónica dinámica conectada a un núcleo NFC. El chip NFC almacena una URL que apunta al perfil de habilidades verificadas de la persona, que el sistema SkillGPT utiliza para desbloquear la asistencia de IA adecuada.",
                     nfcLabel: "Codificación NFC (registro URI – programa tu tarjeta NFC con esta URL):",
-                    footer: "Tarjeta de Habilidades SmarterYou – prototipo de investigación HCI que explora un uso responsable de la IA basado en las habilidades."
+                    footer: "Tarjeta de Habilidades SkillGPT – prototipo de investigación HCI que explora un uso responsable de la IA basado en las habilidades."
                 }
             },
             DE: {
@@ -594,12 +583,12 @@
                 desktop: "Desktop",
                 mobile: "Mobil",
                 deskSteps: [
-                    "Gehe auf SmarterYou.ai und melde dich an",
+                    "Gehe auf SkillGPT.ai und melde dich an",
                     "Wähle unter „Skill Card verbinden“:\n'QUEST_TR33_Was_BttR'",
                     "Deine verifizierten Fähigkeiten werden synchronisiert"
                 ],
                 mobSteps: [
-                    "Öffne die SmarterYou-App",
+                    "Öffne die SkillGPT-App",
                     "Halte deine Karte an das Gerät oder scanne den QR-Code",
                     "Fähigkeiten werden synchronisiert und aktualisiert"
                 ],
@@ -626,16 +615,16 @@
                     lastNamePlaceholder: "Muster"
                 },
                 pdf: {
-                    headerTitle: "SmarterYou Fähigkeitenkarten-Prototyp",
+                    headerTitle: "SkillGPT Fähigkeitenkarten-Prototyp",
                     headerSubtitle: "Human–Computer Interaction (HCI) Projekt – Universitätsstudie",
                     generatedForPrefix: "Prototyp-Karte erzeugt für:",
                     intro: "Diese prototypische Karte ist Teil eines HCI-Projekts, das untersucht, wie negative Muster der KI-Nutzung verringert werden können. Das System ermutigt Menschen, zunächst reale Fähigkeiten in einem Bereich aufzubauen und erst danach KI-Werkzeuge freizuschalten, um Aufgaben in diesem Bereich zu automatisieren.",
                     rationale: "Indem der Zugang zur Automatisierung an nachgewiesene Kompetenz geknüpft wird, hat das Projekt zum Ziel:\n• eine übermäßige Abhängigkeit von generischen KI-Tools zu vermeiden,\n• bewusstes Lernen und Feedback zu fördern und\n• eine transparente Verbindung zwischen verifizierten Fähigkeiten, Identität und KI-Unterstützung zu schaffen.",
                     layoutHeading: "Layout der Prototyp-Karte",
                     implHeading: "Hinweise zur Implementierung (Prototyp)",
-                    implText: "In einem vollständigen Einsatz würde die visuelle Karte auf einem dynamischen E-Ink-Display mit NFC-Kern dargestellt. Der NFC-Chip speichert eine URL, die auf das verifizierte Fähigkeitsprofil der lernenden Person zeigt, das das SmarterYou-System nutzt, um passende KI-Unterstützung freizuschalten.",
+                    implText: "In einem vollständigen Einsatz würde die visuelle Karte auf einem dynamischen E-Ink-Display mit NFC-Kern dargestellt. Der NFC-Chip speichert eine URL, die auf das verifizierte Fähigkeitsprofil der lernenden Person zeigt, das das SkillGPT-System nutzt, um passende KI-Unterstützung freizuschalten.",
                     nfcLabel: "NFC-Codierung (URI-Eintrag – programmieren Sie Ihre NFC-Karte mit dieser URL):",
-                    footer: "SmarterYou Fähigkeitenkarte – HCI-Forschungsprototyp für kompetenzorientierte, verantwortungsvolle KI-Nutzung."
+                    footer: "SkillGPT Fähigkeitenkarte – HCI-Forschungsprototyp für kompetenzorientierte, verantwortungsvolle KI-Nutzung."
                 }
             }
         };
@@ -765,21 +754,12 @@
             // Generate UUID for card
             const cardUID = generateUUID();
 
-            // Create Data Object
-            const id1 = Math.floor(1000 + Math.random() * 9000);
-            const id2 = Math.floor(1000 + Math.random() * 9000);
-            const id3 = Math.floor(1000 + Math.random() * 9000);
-            const fullId = `${id1}-${id2}-${id3}`;
-            const bluetoothName = generateBluetoothName();
-
             cardData = {
-                id: fullId,
                 cardUID: cardUID,
                 name: `${fname} ${lname}`,
                 skills: skills,
                 language: lang,
-                issuer: logoDataUrl,
-                bluetoothName: bluetoothName
+                issuer: logoDataUrl
             };
 
             // Upload to Firebase
@@ -800,10 +780,10 @@
                 const t = dictionary[cardData.language];
                 const ctxFront = document.getElementById('canvas-front').getContext('2d');
                 const ctxBack = document.getElementById('canvas-back').getContext('2d');
-                const w = 1024;
-                const h = 648;
+                const w = 2048;
+                const h = 1296;
 
-                const radius = 40;
+                const radius = 80;
                 function drawRoundedRect(ctx, x, y, width, height, r) {
                     ctx.beginPath();
                     ctx.moveTo(x + r, y);
@@ -825,33 +805,33 @@
                 // Fill the whole canvas so the corners are white in JPEG/PDF exports
                 ctxFront.fillRect(0, 0, w, h);
                 ctxFront.strokeStyle = "#cccccc"; // light grey border
-                ctxFront.lineWidth = 6;
-                drawRoundedRect(ctxFront, 5, 5, w - 10, h - 10, radius);
+                ctxFront.lineWidth = 12;
+                drawRoundedRect(ctxFront, 10, 10, w - 20, h - 20, radius);
                 ctxFront.fill();
                 ctxFront.stroke();
 
                 // Header
                 ctxFront.fillStyle = "#000000";
-                const maxFrontTextWidth = w - 430; // leave room for QR + margins on the right
+                const maxFrontTextWidth = w - 860; // leave room for QR + margins on the right
                 // Title – shrink if it would overlap the QR area
-                setFittedFont(ctxFront, 60, 28, "bold", "Helvetica", t.title, maxFrontTextWidth);
-                ctxFront.fillText(t.title, 50, 90);
+                setFittedFont(ctxFront, 120, 56, "bold", "Helvetica", t.title, maxFrontTextWidth);
+                ctxFront.fillText(t.title, 100, 180);
 
                 // Subtitle – also constrained by the same width
-                setFittedFont(ctxFront, 40, 20, "bold", "Helvetica", t.subtitle, maxFrontTextWidth);
-                ctxFront.fillText(t.subtitle, 50, 140);
+                setFittedFont(ctxFront, 80, 40, "bold", "Helvetica", t.subtitle, maxFrontTextWidth);
+                ctxFront.fillText(t.subtitle, 100, 280);
 
                 // Scan / NFC text top-right
-                const qrLeftX = w - 360;   // same left edge as QR
-                let scanY = 70;           // position above QR
+                const qrLeftX = w - 720;   // same left edge as QR
+                let scanY = 140;           // position above QR
                 ctxFront.textAlign = "left";
-                const maxScanWidth = 320; // width from qrLeftX to the card edge
+                const maxScanWidth = 640; // width from qrLeftX to the card edge
                 const longestScan = [t.scan1, t.scan2, t.scan3].reduce((a, b) => (a.length > b.length ? a : b), "");
-                setFittedFont(ctxFront, 24, 14, "", "Helvetica", longestScan, maxScanWidth);
+                setFittedFont(ctxFront, 48, 28, "", "Helvetica", longestScan, maxScanWidth);
                 ctxFront.fillText(t.scan1, qrLeftX, scanY);
-                scanY += 28;
+                scanY += 56;
                 ctxFront.fillText(t.scan2, qrLeftX, scanY);
-                scanY += 28;
+                scanY += 56;
                 ctxFront.fillText(t.scan3, qrLeftX, scanY);
 
                 // NFC / wireless icon using SVG drawn to canvas (e-ink friendly, black only)
@@ -865,10 +845,10 @@
                 `;
                 const contactlessImg = new Image();
                 contactlessImg.onload = () => {
-                    const iconSize = 64;
+                    const iconSize = 128;
                     // position the icon near the scan text, above the QR code
-                    const iconX = qrLeftX + 240;
-                    const iconY = 60;
+                    const iconX = qrLeftX + 480;
+                    const iconY = 120;
                     ctxFront.drawImage(contactlessImg, iconX, iconY, iconSize, iconSize);
                 };
                 contactlessImg.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(contactlessSVG);
@@ -877,15 +857,15 @@
 
                 // Horizontal Line
                 ctxFront.beginPath();
-                ctxFront.moveTo(40, 170);
-                ctxFront.lineTo(w - 40, 170);
-                ctxFront.lineWidth = 4;
+                ctxFront.moveTo(80, 340);
+                ctxFront.lineTo(w - 80, 340);
+                ctxFront.lineWidth = 8;
                 ctxFront.stroke();
 
                 // Name – constrained so it does not overlap the QR code
-                const maxNameWidth = w - 430; // same idea as title/subtitle
-                setFittedFont(ctxFront, 55, 28, "bold", "Helvetica", cardData.name, maxNameWidth);
-                ctxFront.fillText(cardData.name, 50, 250);
+                const maxNameWidth = w - 860; // same idea as title/subtitle
+                setFittedFont(ctxFront, 110, 56, "bold", "Helvetica", cardData.name, maxNameWidth);
+                ctxFront.fillText(cardData.name, 100, 500);
 
                 // Skills – all share a fitted font so they stay within the card area
                 const skillTexts = [];
@@ -898,42 +878,36 @@
                 }
 
                 const longestSkillText = skillTexts.reduce((a, b) => (a.length > b.length ? a : b), "");
-                const maxSkillWidth = w - 430;
-                // Base 40px, but shrink as needed (down to 20px)
-                setFittedFont(ctxFront, 40, 20, "", "Helvetica", longestSkillText, maxSkillWidth);
+                const maxSkillWidth = w - 860;
+                // Base 80px, but shrink as needed (down to 40px)
+                setFittedFont(ctxFront, 80, 40, "", "Helvetica", longestSkillText, maxSkillWidth);
 
-                let currentY = 320;
+                let currentY = 640;
 
                 // Skill 1
                 if (cardData.skills[0]) {
                     ctxFront.fillStyle = "#000";
-                    ctxFront.fillText(cardData.skills[0], 50, currentY);
-                    currentY += 50;
+                    ctxFront.fillText(cardData.skills[0], 100, currentY);
+                    currentY += 100;
                 }
                 // Skill 2
                 if (cardData.skills[1]) {
                     ctxFront.fillStyle = "#000";
-                    ctxFront.fillText(cardData.skills[1], 50, currentY);
-                    currentY += 50;
+                    ctxFront.fillText(cardData.skills[1], 100, currentY);
+                    currentY += 100;
                 }
                 // Others (rendered in a slightly softer colour)
                 if (cardData.skills.length > 2) {
                     ctxFront.fillStyle = "#555";
-                    ctxFront.fillText(`+${remaining} ${t.others}`, 50, currentY);
+                    ctxFront.fillText(`+${remaining} ${t.others}`, 100, currentY);
                     ctxFront.fillStyle = "#000";
                 }
 
-                // ID
-                ctxFront.font = "bold 40px Courier New";
-                ctxFront.textAlign = "right";
-                ctxFront.fillText(cardData.id, w - 40, h - 40);
-                ctxFront.textAlign = "left";
-
                 // Issuer text and logo (black & white for e-ink)
                 if (cardData.issuer) {
-                    ctxFront.font = "30px Helvetica";
+                    ctxFront.font = "60px Helvetica";
                     ctxFront.fillStyle = "#000000";
-                    ctxFront.fillText(t.issued, 50, h - 160);
+                    ctxFront.fillText(t.issued, 100, h - 320);
 
                     const img = new Image();
                     img.onload = () => {
@@ -955,8 +929,8 @@
                         offCtx.putImageData(imageData, 0, 0);
 
                         // Constrain logo size and draw grayscale version while preserving aspect ratio
-                        const maxLogoW = 220;
-                        const maxLogoH = 70;
+                        const maxLogoW = 440;
+                        const maxLogoH = 140;
                         let drawW = offCanvas.width;
                         let drawH = offCanvas.height;
                         const scale = Math.min(maxLogoW / drawW, maxLogoH / drawH);
@@ -969,8 +943,8 @@
                             0,
                             offCanvas.width,
                             offCanvas.height,
-                            50,
-                            h - 140,
+                            100,
+                            h - 280,
                             drawW,
                             drawH
                         );
@@ -979,11 +953,11 @@
                     img.src = cardData.issuer;
                 } else {
                     // Fallback text and placeholder issuer
-                    ctxFront.font = "30px Helvetica";
+                    ctxFront.font = "60px Helvetica";
                     ctxFront.fillStyle = "#000000";
-                    ctxFront.fillText(t.issued, 50, h - 160);
-                    ctxFront.font = "bold 30px Helvetica";
-                    ctxFront.fillText("SmartYou University", 50, h - 120);
+                    ctxFront.fillText(t.issued, 100, h - 320);
+                    ctxFront.font = "bold 60px Helvetica";
+                    ctxFront.fillText("SmartYou University", 100, h - 240);
                     finishFront();
                 }
 
@@ -992,13 +966,8 @@
                     const qrDiv = document.getElementById('qr-target');
                     qrDiv.innerHTML = '';
 
-                    // Build URL with card details as query parameters for QR + NFC
-                    const baseUrl = "https://www.smarteryou.ai/";
-                    const nameParam = encodeURIComponent(cardData.name.replace(/\s+/g, ""));
-                    const skillsParam = encodeURIComponent(cardData.skills.join("_"));
-                    const langParam = encodeURIComponent(cardData.language);
-                    const idParam = encodeURIComponent(cardData.id);
-                    const qrUrl = `${baseUrl}?Name=${nameParam}&Skills=${skillsParam}&Lang=${langParam}&ID=${idParam}`;
+                    // Build URL with cardUID for QR + NFC
+                    const qrUrl = `https://jwu56.github.io/react-skilltree?cardId=${cardData.cardUID}`;
 
                     // Store URL so we can also render it into the PDF / NFC instructions
                     cardData.qrUrl = qrUrl;
@@ -1006,8 +975,8 @@
                     try {
                         new QRCode(qrDiv, {
                             text: qrUrl,
-                            width: 256,
-                            height: 256
+                            width: 512,
+                            height: 512
                         });
                     } catch (e) {
                         console.error('QR generation failed', e);
@@ -1022,7 +991,7 @@
                             clearInterval(checkQR);
                             const i = new Image();
                             i.onload = () => {
-                                ctxFront.drawImage(i, w - 360, 210, 320, 320);
+                                ctxFront.drawImage(i, w - 720, 420, 640, 640);
                                 drawBack(); // Proceed to back
                             };
                             i.src = qrImg.src;
@@ -1038,29 +1007,26 @@
                     // Fill the whole canvas so the corners are white in JPEG/PDF exports
                     ctxBack.fillRect(0, 0, w, h);
                     ctxBack.strokeStyle = "#cccccc"; // light grey border
-                    ctxBack.lineWidth = 6;
-                    drawRoundedRect(ctxBack, 5, 5, w - 10, h - 10, radius);
+                    ctxBack.lineWidth = 12;
+                    drawRoundedRect(ctxBack, 10, 10, w - 20, h - 20, radius);
                     ctxBack.fill();
                     ctxBack.stroke();
 
                     // Black strip header (simulating the NFC/Tech strip), inset to respect rounded corners
                     ctxBack.fillStyle = "#000000";
-                    ctxBack.fillRect(20, 40, w - 40, 150);
+                    ctxBack.fillRect(40, 80, w - 80, 300);
 
                     // Instructions title
                     ctxBack.fillStyle = "#000000";
-                    ctxBack.font = "bold 40px Helvetica";
-                    ctxBack.fillText("Instructions", 40, 260);
+                    ctxBack.font = "bold 80px Helvetica";
+                    ctxBack.fillText("Instructions", 80, 520);
 
                     // Column positions
-                    const col1X = 40;          // Desktop column
-                    const col2X = w / 2 + 20;  // Mobile column
-                    const startY = 310;
+                    const col1X = 80;          // Desktop column
+                    const col2X = w / 2 + 40;  // Mobile column
+                    const startY = 620;
 
-                    // Inject random Bluetooth name into step 2 for the desktop instructions
-                    const deskSteps = t.deskSteps.map(s =>
-                        s.replace("QUEST_TR33_Was_BttR", cardData.bluetoothName)
-                    );
+                    const deskSteps = t.deskSteps;
                     const mobSteps = t.mobSteps;
 
                     // Helper: draw one numbered step block in a column, supporting '\n' line breaks
@@ -1068,32 +1034,32 @@
                         let yLocal = startYLocal;
                         steps.forEach((stepText, index) => {
                             const lines = stepText.split('\n');
-                            ctxBack.font = "26px Helvetica";
+                            ctxBack.font = "52px Helvetica";
                             lines.forEach((line, lineIdx) => {
                                 const prefix = (lineIdx === 0) ? `${index + 1}. ` : "    ";
                                 ctxBack.fillText(prefix + line, x, yLocal);
-                                yLocal += 30;
+                                yLocal += 60;
                             });
-                            yLocal += 6; // extra spacing after each step
+                            yLocal += 12; // extra spacing after each step
                         });
                         return yLocal;
                     }
 
                     // Desktop section (left column)
-                    ctxBack.font = "bold 32px Helvetica";
+                    ctxBack.font = "bold 64px Helvetica";
                     ctxBack.fillText(t.desktop, col1X, startY);
-                    const desktopBottomY = drawStepColumn(deskSteps, col1X, startY + 30);
+                    const desktopBottomY = drawStepColumn(deskSteps, col1X, startY + 60);
 
                     // Mobile section (right column)
-                    ctxBack.font = "bold 32px Helvetica";
+                    ctxBack.font = "bold 64px Helvetica";
                     ctxBack.fillText(t.mobile, col2X, startY);
-                    const mobileBottomY = drawStepColumn(mobSteps, col2X, startY + 30);
+                    const mobileBottomY = drawStepColumn(mobSteps, col2X, startY + 60);
 
                     // Tagline underneath both columns
-                    ctxBack.font = "italic 26px Helvetica";
+                    ctxBack.font = "italic 52px Helvetica";
                     ctxBack.fillStyle = "#444";
 
-                    const taglineTop = Math.max(desktopBottomY, mobileBottomY) + 20;
+                    const taglineTop = Math.max(desktopBottomY, mobileBottomY) + 40;
 
                     // Simple word wrap for tagline
                     const words = t.tagline.split(' ');
@@ -1103,20 +1069,20 @@
                     for (let n = 0; n < words.length; n++) {
                         const testLine = line + words[n] + ' ';
                         const metrics = ctxBack.measureText(testLine);
-                        if (metrics.width > w - 80 && n > 0) {
-                            ctxBack.fillText(line, 40, tagY);
+                        if (metrics.width > w - 160 && n > 0) {
+                            ctxBack.fillText(line, 80, tagY);
                             line = words[n] + ' ';
-                            tagY += 35;
+                            tagY += 70;
                         } else {
                             line = testLine;
                         }
                     }
-                    ctxBack.fillText(line, 40, tagY);
+                    ctxBack.fillText(line, 80, tagY);
 
                     // Language code in header (lower and slightly to the right)
                     ctxBack.fillStyle = "#ffffff";
-                    ctxBack.font = "bold 32px Helvetica";
-                    ctxBack.fillText(cardData.language, 40, 120);
+                    ctxBack.font = "bold 64px Helvetica";
+                    ctxBack.fillText(cardData.language, 80, 240);
 
                     // NFC / wireless icon on back using a high-contrast white-stroke icon
                     const contactlessBackSVG = `
@@ -1130,9 +1096,9 @@
                     `;
                     const contactlessBackImg = new Image();
                     contactlessBackImg.onload = () => {
-                        const iconSize = 48;
-                        const iconX = w - 90;   // slightly further right
-                        const iconY = 120;      // lower in the strip
+                        const iconSize = 96;
+                        const iconX = w - 180;   // slightly further right
+                        const iconY = 240;      // lower in the strip
                         ctxBack.drawImage(contactlessBackImg, iconX, iconY, iconSize, iconSize);
                         resolve();
                     };
@@ -1181,7 +1147,8 @@
             camera.position.z = 5;
 
             // Renderer
-            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(viewport.clientWidth, viewport.clientHeight);
             viewport.appendChild(renderer.domElement);
 
@@ -1192,9 +1159,16 @@
             const texFront = new THREE.CanvasTexture(document.getElementById('canvas-front'));
             const texBack = new THREE.CanvasTexture(document.getElementById('canvas-back'));
             
-            // Fix orientation if needed
+            // Improve texture quality
             texFront.encoding = THREE.sRGBEncoding;
+            texFront.anisotropy = renderer.capabilities.getMaxAnisotropy();
+            texFront.minFilter = THREE.LinearFilter;
+            texFront.magFilter = THREE.LinearFilter;
+            
             texBack.encoding = THREE.sRGBEncoding;
+            texBack.anisotropy = renderer.capabilities.getMaxAnisotropy();
+            texBack.minFilter = THREE.LinearFilter;
+            texBack.magFilter = THREE.LinearFilter;
 
             // Geometry (Card shape: Width 1.58, Height 1, Depth 0.02)
             const geometry = new THREE.BoxGeometry(2.8, 1.76, 0.02); // Scaled up slightly for view
@@ -1351,7 +1325,7 @@
 
             // --- Implementation / NFC notes ---
             const nfcY = startY + cardH + 15;
-            const qrUrl = cardData.qrUrl || 'https://www.smarteryou.ai/';
+            const qrUrl = cardData.qrUrl || 'https://www.SkillGPT.ai/';
 
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(12);
