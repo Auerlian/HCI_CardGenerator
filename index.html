@@ -8,6 +8,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        
+    const firebaseConfig = {
+        apiKey: "AIzaSyDmNyfhWVzDiOvxQXJrD8iTaE5Y1cRAi9k",
+        authDomain: "skillplatform-test.firebaseapp.com",
+        projectId: "skillplatform-test",
+        storageBucket: "skillplatform-test.firebasestorage.app",
+        messagingSenderId: "607447155294",
+        appId: "1:607447155294:web:5fc6c198dffa88fa9aeacf"
+    };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        window.firebaseDb = db;
+        window.firebaseDoc = doc;
+        window.firebaseSetDoc = setDoc;
+    </script>
 
     <style>
         :root {
@@ -237,6 +259,56 @@
         let logoDataUrl = null; // Stores the uploaded image base64
 
         // --- Helpers ---
+        
+        // Generate a UUID v4
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        
+        // Get skills array for Firebase upload
+        function getSkills() {
+            return skills.map((skill, index) => ({
+                name: skill,
+                level: index + 1,
+                verified: true
+            }));
+        }
+        
+        // Upload to Firebase
+        async function uploadToFirebase(cardUID) {
+            try {
+                const userName = `${document.getElementById('fname').value || 'John'} ${document.getElementById('lname').value || 'Doe'}`;
+                
+                const profileData = {
+                    userName: userName,
+                    userLevel: parseInt(skills.length) || 1,
+                    skills: getSkills(),
+                    cardUID: cardUID,
+                    timestamp: Date.now(),
+                    lastUpdated: Date.now(),
+                    lastSyncedAt: Date.now(),
+                    verifiedAt: Date.now(),
+                    verificationMethod: 'encoder',
+                    encrypted: true,
+                    signed: true
+                };
+
+                const appId = '1:607447155294:web:5fc6c198dffa88fa9aeacf';
+                const cardRef = window.firebaseDoc(window.firebaseDb, 'artifacts', appId, 'public', 'data', 'cards', cardUID);
+                await window.firebaseSetDoc(cardRef, profileData);
+                
+                console.log('Successfully uploaded to Firebase with UID:', cardUID);
+                return true;
+            } catch (error) {
+                console.error('Error uploading to Firebase:', error);
+                alert('Failed to upload to Firebase: ' + error.message);
+                return false;
+            }
+        }
         // Fit text into a maximum width by shrinking the font size
         function setFittedFont(ctx, baseSize, minSize, fontWeight, fontFamily, text, maxWidth) {
             let size = baseSize;
@@ -690,6 +762,9 @@
             document.getElementById('loader').classList.remove('hidden');
             document.getElementById('viewport').style.display = 'block';
 
+            // Generate UUID for card
+            const cardUID = generateUUID();
+
             // Create Data Object
             const id1 = Math.floor(1000 + Math.random() * 9000);
             const id2 = Math.floor(1000 + Math.random() * 9000);
@@ -699,12 +774,16 @@
 
             cardData = {
                 id: fullId,
+                cardUID: cardUID,
                 name: `${fname} ${lname}`,
                 skills: skills,
                 language: lang,
                 issuer: logoDataUrl,
                 bluetoothName: bluetoothName
             };
+
+            // Upload to Firebase
+            await uploadToFirebase(cardUID);
 
             // Wait a moment for UI transition
             setTimeout(async () => {
